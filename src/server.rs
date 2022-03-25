@@ -197,10 +197,7 @@ where
 
         // Bind to the address and serve
         let address = address.into();
-        info!(
-            "{}",
-            write!(f, "{}", format!("serving on: {:?}", address.to_string()))
-        );
+        info!("{}", format!("serving on: {:?}", address.to_string()));
         let listener = TcpListener::bind(address).await?;
 
         // Loop over incoming TCP connections until `initialize` returns `None`
