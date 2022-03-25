@@ -12,7 +12,7 @@ use {
     thiserror::Error,
     tokio::{net::TcpListener, select, sync::mpsc},
     tokio_rustls::{rustls, TlsAcceptor},
-    tracing::{error, info},
+    tracing::error,
 };
 
 use super::{channel::TransportError, handshake, io_stream::IoStream, pem};
@@ -196,7 +196,6 @@ where
 
         // Bind to the address and serve
         let address = address.into();
-        info!("{}", format!("serving on: {:?}", address.to_string()));
         let listener = TcpListener::bind(address).await?;
 
         // Loop over incoming TCP connections until `initialize` returns `None`
