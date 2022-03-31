@@ -1,6 +1,5 @@
 //! The server side of Zeekoe's transport layer.
 
-use tracing::info;
 use {
     dialectic::prelude::*,
     dialectic_reconnect::resume,
@@ -122,6 +121,7 @@ where
     /// Note that `initialize` runs sequentially: it can pause the server if desired by
     /// `.await`-ing.
     pub async fn serve_while<
+        'a,
         Input,
         Error,
         Init,
@@ -130,12 +130,13 @@ where
         InteractionFut,
         TerminateFut,
     >(
-        &self,
+        &'a self,
         address: impl Into<SocketAddr>,
         tls_config: Option<(&Path, &Path)>,
         mut initialize: Init,
         interact: Interaction,
         terminate: TerminateFut,
+        on_running: impl FnOnce(String) + 'a,
     ) -> Result<(), io::Error>
     where
         Input: Send + 'static,
@@ -197,7 +198,7 @@ where
 
         // Bind to the address and serve
         let address = address.into();
-        info!("{}", format!("serving on: {:?}", address.to_string()));
+        on_running(address.to_string());
         let listener = TcpListener::bind(address).await?;
 
         // Loop over incoming TCP connections until `initialize` returns `None`
