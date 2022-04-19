@@ -13,21 +13,21 @@ path = "src/lib.rs"
 allow_explicit_certificate_trust = []
 
 [dependencies]
-bincode = "*"
-tokio = { version = "*", features = ["full"] }
-tokio-rustls = "*"
-rustls = "*"
-futures = "*"
-serde = "*"
+bincode = "1"
+tokio = { version = "1", features = ["full"] }
+tokio-rustls = "0"
+rustls = "0"
+futures = "0"
+serde = "1"
 dialectic = { git = "https://github.com/boltlabs-inc/dialectic.git", branch = "main" }
 dialectic-tokio-serde = { git = "https://github.com/boltlabs-inc/dialectic.git", branch = "main" }
 dialectic-tokio-serde-bincode = { git = "https://github.com/boltlabs-inc/dialectic.git", branch = "main" }
 dialectic-reconnect = { features = ["serde", "humantime-serde"], git = "https://github.com/boltlabs-inc/dialectic.git", branch = "main" }
-uuid = { version = "*", features = ["serde", "v4"] }
-tracing = "*"
-thiserror = "*"
-webpki = "*"
-webpki-roots = "*"
-pem = "*"
+uuid = { version = "0", features = ["serde", "v4"] }
+tracing = "0"
+thiserror = "1"
+webpki = "0"
+webpki-roots = "0"
+pem = "1"
 
 
